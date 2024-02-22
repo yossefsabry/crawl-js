@@ -83,3 +83,19 @@ test("test both relative and absolute", () => {
   const expected = ["https://blog.boot.dev/path/", "https://blog.boot.dev/path1/"];
   expect(actual).toEqual(expected);
 });
+
+test("invalid url", () => {
+  const htmlText = `
+  <html>
+    <body>
+      <a href="invalid">
+        click to blog boot dev page
+      </a>
+    </body>
+  </html>
+  `;
+  const baseURL = "https://blog.boot.dev";
+  const actual = getLinksHtml(htmlText, baseURL);
+  const expected = [];
+  expect(actual).toEqual(expected);
+});
