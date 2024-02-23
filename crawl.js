@@ -22,7 +22,7 @@ async function crawlPage(baseURL, currentURL, pageObject) {
 
     if (resp.status > 399) {
       console.log("error with status code:", resp.status);
-      return pageObject ;
+      return pageObject;
     }
     const contentType = resp.headers.get("content-type");
     if (!contentType.includes("text/html")) {
@@ -33,10 +33,9 @@ async function crawlPage(baseURL, currentURL, pageObject) {
     const htmlBody = await resp.text();
 
     const nextURLs = getLinksHtml(htmlBody, baseURL);
-    for (const nextURL in nextURLs) {
+    for (const nextURL of nextURLs) {
       pageObject = await crawlPage(baseURL, nextURL, pageObject);
     }
-
   } catch (err) {
     console.log("## error happend: ", err);
   }
